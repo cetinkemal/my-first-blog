@@ -1,0 +1,64 @@
+{% extends 'layout.html' %}
+
+{% load static %}
+
+{% block css_files %}
+    <link rel="sytlesheet" href="{% static 'courses/css/style.css' %}">
+{% endblock  %}
+
+{% block page_title %}
+    Create Course
+{% endblock page_title %}
+
+
+{% block content %}
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-12">
+                {% if error %}
+                    <div class="alert alert-danger">
+                        {{ msg }}
+                    </div>
+                {% endif %}
+                <form action="{% url 'create_course' %}" method="POST" novalidate enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    {% include 'partials/_form.html' %}
+
+                    {% comment %} <div class="mb-3 {% if form.title.errors %} invalid {% endif %}">
+                        {{ form.title.errors }}
+                        <label class="form-label" for="{{form.title.id_for_label}}">Title</label>
+                        {{ form.title }}
+                    </div>
+
+                    <div class="mb-3 {% if form.description.errors %} invalid {% endif %}">
+                        {{ form.description.errors }}
+                        <label class="form-label" for="{{form.description.id_for_label}}">description</label>
+                        {{ form.description }}
+                    </div>
+
+                    <div class="mb-3 {% if form.imageUrl.errors %} invalid {% endif %}">
+                        {{ form.imageUrl.errors }}
+                        <label class="form-label" for="{{form.imageUrl.id_for_label}}">imageUrl</label>
+                        {{ form.imageUrl }}
+                    </div>
+
+                    <div class="mb-3 {% if form.slug.errors %} invalid {% endif %}">
+                        {{ form.slug.errors }}
+                        <label class="form-label" for="{{form.slug.id_for_label}}">slug</label>
+                        {{ form.slug }}
+                    </div> {% endcomment %}
+                    
+
+
+
+                    <button class="btn btn-primary" type="submit">Kaydet</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block js_files %}
+    <script> src="{% static 'courses/js/script.js' %}"</script>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+
+{% load static %}
+
+{% block css_files %}
+    <link rel="sytlesheet" href="{% static 'courses/css/style.css' %}">
+{% endblock  %}
+
+{% block page_title %}
+    Kurslar
+{% endblock page_title %}
+
+{% block content %}
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-3">
+                {% include 'courses/partials/_categories.html' %}
+            </div>
+            <div class="col-9">     
+                {% if courses|length == 0 %}
+                    <div class="alert alert-warning">Kurs Bulunamadı.</div>
+                {% endif %}
+
+                {% for course in courses %}
+                    {% include 'courses/partials/_course.html' %}
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block js_files %}
+    <script> src="{% static 'courses/js/script.js' %}"</script>
+{% endblock %}
